@@ -4,9 +4,9 @@ import { Task } from "./components/Task"
 
 
 function App() {
-  const [tasks, SetTasks] = useState([ 
-      "Fazer um bolo",
-      "Lavar a louça"
+  const [tasks, setTasks] = useState([
+    "Fazer um bolo",
+    "Lavar a louça"
   ])
 
   const [newTask, setNewTask] = useState('')
@@ -14,17 +14,17 @@ function App() {
   function handleNewTask(event) {
     event.preventDefault()
 
-    SetTasks([
+
+    setTasks([
       ...tasks,
       newTask
     ])
 
-    console.log(tasks)
+    setNewTask('')
+
   }
 
-  function handleNewTaskChange({target}) {
-    console.log(target.value)
-
+  function handleNewTaskChange({ target }) {
     setNewTask(target.value)
   }
 
@@ -36,9 +36,11 @@ function App() {
 
         <form
           onSubmit={handleNewTask}
-          className="w-4/6 m-auto py-3 flex -mt-8"
+          className="w-4/6 m-auto py-3 flex -mt-8 mb-6"
         >
           <input
+            required
+            value={newTask}
             onChange={handleNewTaskChange}
             className="w-4/5 bg-box outline-0 p-2 text-white placeholder:text-gray-600"
             type="text"
@@ -65,7 +67,7 @@ function App() {
 
         {tasks.map((task, index) => {
           return (
-            <Task 
+            <Task
               key={index}
               title={task}
             />

@@ -8,7 +8,7 @@ export const Task = ({ title }) => {
                 <li className='flex justify-between items-center'>
                     <div className='space-x-2'>
                         <input type="checkbox" />
-                        <span>{title}</span>
+                        <span className='text-white'>{title}</span>
                     </div>
                     <div>
                         <RiDeleteBin6Line />
