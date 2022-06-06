@@ -36,7 +36,7 @@ function App() {
 
         <form
           onSubmit={handleNewTask}
-          className="w-4/6 m-auto p-3 flex -mt-8"
+          className="w-4/6 m-auto py-3 flex -mt-8"
         >
           <input
             onChange={handleNewTaskChange}
