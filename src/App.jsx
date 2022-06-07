@@ -22,10 +22,12 @@ function App() {
 
   ])
 
+ 
+
+
 
 
   const [newTask, setNewTask] = useState('')
-
   function handleNewTask(event) {
     event.preventDefault()
 
@@ -39,8 +41,7 @@ function App() {
       }
     ])
 
-    console.log(tasks)
-
+    
     setNewTask('')
 
   }
@@ -48,18 +49,34 @@ function App() {
   function handleNewTaskChange({ target }) {
     setNewTask(target.value)
 
-    console.log(newTask)
+    
   }
 
-  function deleteTask(taskToDelete) {
-    const tasksWithoutDeletedOne = tasks.filter(task => {
-      return task.id !== taskToDelete
-    })
-    console.log(tasksWithoutDeletedOne)
-    setTasks(tasksWithoutDeletedOne)
+  function deleteTask(id) {
+    const taskList = tasks.filter(task => task.id !== id);
+
+    setTasks(taskList);
   }
+
+  function handleToggleTaskCompletion(id) {
+    const taskList = tasks.map(task => {
+      if (task.id === id) {
+        task.isComplete = !task.isComplete;
+      }
+      
+      return task;
+    });
+     
+    setTasks(taskList);
+  }
+
+  const completes = tasks.filter(task => {
+return task.isComplete !== false
+  })
 
   
+
+
   return (
     <>
       <Header />
@@ -94,7 +111,7 @@ function App() {
 
             <div className='text-xs space-x-1'>
               <span className='text-blue'>Concluídas</span>
-              <span className='p-1 text-white bg-box rounded-md'>0 de {tasks.length}</span>
+              <span className='p-1 text-white bg-box rounded-md'>{completes.length} de {tasks.length}</span>
             </div>
           </header>
         }
@@ -103,11 +120,13 @@ function App() {
           if (tasks.length > 0) {
             return (
               <Task
+                handleToggleTaskCompletion={handleToggleTaskCompletion}
                 id={task.id}
                 isComplete={task.isComplete}
                 onDeleteTask={deleteTask}
                 key={task.id}
                 title={task.title}
+                task={task}
               />
             )
           }
