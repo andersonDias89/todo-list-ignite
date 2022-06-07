@@ -2,23 +2,25 @@ import { useState } from 'react'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 
 
-export const Task = ({ title, onDeleteTask }) => {
-    const [check, setCheck] = useState(false)
+export const Task = ({ title, onDeleteTask, id, isComplete }) => {
+    const [check, setCheck] = useState(isComplete)
 
     function handleDeleteTask() {
-        onDeleteTask(title)
+        onDeleteTask(id)
     }
 
     function handleCheck() {
-        if (check === false) {
-            setCheck(true)
-        } else {
+        if (check === true) {
             setCheck(false)
+        } else {
+            setCheck(true)
         }
 
         console.log(check)
 
     }
+
+   
 
     return (
         <>

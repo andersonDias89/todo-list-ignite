@@ -3,22 +3,43 @@ import { Header } from "./components/Header"
 import { Task } from "./components/Task"
 import { VoidList } from "./components/VoidList"
 
+import { v4 as uuid } from 'uuid'
+
 
 function App() {
   const [tasks, setTasks] = useState([
-    "Estudar javascript",
-    "Fazer o desafio da rocketseat"
+    {
+      id: uuid(),
+      title: "Estudar javascript",
+      isComplete: false
+    },
+
+    {
+      id: uuid(),
+      title: "Estudar react",
+      isComplete: false
+    }
+
   ])
+
+
 
   const [newTask, setNewTask] = useState('')
 
   function handleNewTask(event) {
     event.preventDefault()
 
+
     setTasks([
       ...tasks,
-      newTask
+      {
+        id: uuid(),
+        title: newTask,
+        isComplete: false
+      }
     ])
+
+    console.log(tasks)
 
     setNewTask('')
 
@@ -26,16 +47,19 @@ function App() {
 
   function handleNewTaskChange({ target }) {
     setNewTask(target.value)
+
+    console.log(newTask)
   }
 
   function deleteTask(taskToDelete) {
     const tasksWithoutDeletedOne = tasks.filter(task => {
-      return task !== taskToDelete
+      return task.id !== taskToDelete
     })
+    console.log(tasksWithoutDeletedOne)
     setTasks(tasksWithoutDeletedOne)
   }
 
-
+  
   return (
     <>
       <Header />
@@ -75,13 +99,15 @@ function App() {
           </header>
         }
 
-        {tasks.map((task, index) => {
+        {tasks.map((task) => {
           if (tasks.length > 0) {
             return (
               <Task
+                id={task.id}
+                isComplete={task.isComplete}
                 onDeleteTask={deleteTask}
-                key={index}
-                title={task}
+                key={task.id}
+                title={task.title}
               />
             )
           }
