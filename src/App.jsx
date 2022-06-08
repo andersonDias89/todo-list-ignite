@@ -22,7 +22,7 @@ function App() {
 
   ])
 
- 
+
 
 
 
@@ -41,7 +41,7 @@ function App() {
       }
     ])
 
-    
+
     setNewTask('')
 
   }
@@ -49,7 +49,7 @@ function App() {
   function handleNewTaskChange({ target }) {
     setNewTask(target.value)
 
-    
+
   }
 
   function deleteTask(id) {
@@ -63,18 +63,16 @@ function App() {
       if (task.id === id) {
         task.isComplete = !task.isComplete;
       }
-      
+
       return task;
     });
-     
+
     setTasks(taskList);
   }
 
   const completes = tasks.filter(task => {
-return task.isComplete !== false
+    return task.isComplete !== false
   })
-
-  
 
 
   return (
